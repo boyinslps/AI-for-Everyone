@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 通識課程 · 重點筆記與提示詞庫｜Day 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEE2;
+    --paper-2:#EBE3D2;
+    --ink:#211C15;
+    --ink-soft:#5C5346;
+    --line:#D8CDB6;
+    --clay:#BC4A2A;
+    --clay-deep:#9B3A20;
+    --gold:#A87C24;
+    --teal:#2E5F57;
+    --code-bg:#17140F;
+    --code-bg-2:#211C15;
+    --code-text:#ECE3D0;
+    --code-dim:#8E8369;
+    --tag:#C2562E;
+    --shadow:rgba(33,28,21,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans TC",system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.85;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(188,74,42,.05), transparent 42%),
+      radial-gradient(circle at 84% 78%, rgba(46,95,87,.05), transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- 頂部導覽 ---------- */
+  .sticky-head{position:sticky;top:0;z-index:60}
+  .topbar{
+    background:rgba(244,238,226,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.7rem clamp(1rem,4vw,3rem);
+  }
+  .brand{display:flex;align-items:baseline;gap:.6rem;font-family:"Fraunces",serif}
+  .brand b{font-weight:900;font-size:1.15rem;letter-spacing:.02em}
+  .brand span{font-family:"Noto Sans TC";font-size:.72rem;color:var(--ink-soft);letter-spacing:.18em}
+  .topnav{display:flex;gap:.2rem;flex-wrap:wrap}
+  .topnav a{
+    font-size:.78rem;color:var(--ink-soft);text-decoration:none;
+    padding:.3rem .6rem;border-radius:999px;transition:.2s;white-space:nowrap;
+  }
+  .topnav a:hover{color:var(--clay);background:var(--paper-2)}
+  @media(max-width:860px){.topnav{display:none}}
+
+  /* ---------- 容器 ---------- */
+  .wrap{max-width:980px;margin:0 auto;padding:0 clamp(1.1rem,5vw,2.5rem)}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:clamp(3.5rem,9vw,7rem) 0 clamp(2.5rem,6vw,4rem);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.34em;
+    color:var(--clay);text-transform:uppercase;margin-bottom:1.4rem;
+    display:flex;align-items:center;gap:.8rem;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--clay)}
+  .hero h1{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(2.4rem,6.5vw,4.4rem);line-height:1.12;letter-spacing:-.01em;
+    margin-bottom:1.3rem;
+  }
+  .hero h1 em{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:500;
+    color:var(--clay);
+  }
+  .hero .lede{
+    font-size:clamp(1rem,2.4vw,1.18rem);color:var(--ink-soft);
+    max-width:640px;font-weight:300;
+  }
+  .hero-meta{
+    margin-top:2.2rem;display:flex;gap:2.2rem;flex-wrap:wrap;
+    font-family:"JetBrains Mono",monospace;font-size:.74rem;color:var(--ink-soft);
+    letter-spacing:.06em;
+  }
+  .hero-meta b{display:block;font-family:"Fraunces",serif;font-size:1.8rem;color:var(--ink);font-weight:900;letter-spacing:0}
+
+  /* ---------- 區塊標題 ---------- */
+  section.block{padding:clamp(2.5rem,6vw,4.5rem) 0;border-top:1px solid var(--line);scroll-margin-top:150px}
+  .sec-head{display:flex;align-items:flex-start;gap:1.3rem;margin-bottom:2.2rem}
+  .sec-num{
+    font-family:"Fraunces",serif;font-weight:900;font-size:clamp(2.2rem,5vw,3.4rem);
+    color:var(--clay);line-height:1;flex-shrink:0;opacity:.9;
+  }
+  .sec-titles h2{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1.25;margin-bottom:.3rem;
+  }
+  .sec-titles p{font-size:.92rem;color:var(--ink-soft);font-weight:300}
+
+  /* ---------- 概念筆記 ---------- */
+  h3{
+    font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.22rem;
+    margin:2.2rem 0 .9rem;display:flex;align-items:center;gap:.6rem;
+  }
+  h3::before{content:"";width:9px;height:9px;background:var(--clay);border-radius:2px;transform:rotate(45deg);flex-shrink:0}
+  h4{font-family:"Noto Sans TC";font-weight:700;font-size:1.02rem;margin:1.5rem 0 .5rem;color:var(--ink)}
+  p.note{margin:.7rem 0;color:var(--ink);font-size:.98rem}
+  p.note.soft{color:var(--ink-soft);font-size:.92rem}
+  .note strong{color:var(--clay-deep);font-weight:700}
+
+  /* 重點卡 grid */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.4rem 0}
+  .card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:14px;
+    padding:1.2rem 1.3rem;transition:.25s;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--clay);opacity:.7}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px -14px var(--shadow)}
+  .card .k{font-family:"Fraunces",serif;font-weight:900;font-size:.9rem;color:var(--clay);letter-spacing:.05em;margin-bottom:.4rem;display:block}
+  .card h5{font-family:"Noto Sans TC";font-weight:700;font-size:1rem;margin-bottom:.35rem}
+  .card p{font-size:.86rem;color:var(--ink-soft);line-height:1.65}
+
+  /* 關鍵詞 chips */
+  .keywords{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 .2rem}
+  .chip{
+    font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--teal);
+    border:1px solid #BFCFC9;background:#E7EEE9;padding:.18rem .6rem;border-radius:999px;letter-spacing:.03em;
+  }
+
+  /* 引用 / 比喻 */
+  blockquote{
+    border-left:3px solid var(--gold);background:rgba(168,124,36,.07);
+    padding:.9rem 1.2rem;margin:1.2rem 0;border-radius:0 10px 10px 0;
+    font-size:.93rem;color:var(--ink-soft);font-style:italic;
+  }
+
+  /* ---------- 提示詞代碼塊 ---------- */
+  .prompt-wrap{margin:1.2rem 0 1.8rem}
+  .prompt-label{
+    display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;flex-wrap:wrap;
+  }
+  .prompt-tag{
+    font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.16em;
+    background:var(--tag);color:#fff;padding:.2rem .65rem;border-radius:6px;text-transform:uppercase;font-weight:500;
+  }
+  .prompt-name{font-family:"Noto Sans TC";font-weight:700;font-size:.95rem}
+  .prompt-sub{font-size:.8rem;color:var(--ink-soft)}
+  .prompt-block{
+    position:relative;background:var(--code-bg);
+    border-radius:14px;border:1px solid #2c2619;
+    box-shadow:0 18px 40px -22px rgba(0,0,0,.6);
+    overflow:hidden;
+  }
+  .prompt-block::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 18%);
+  }
+  .prompt-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.55rem .9rem;border-bottom:1px solid #2c2619;background:var(--code-bg-2);
+  }
+  .dots{display:flex;gap:.4rem}
+  .dots i{width:10px;height:10px;border-radius:50%;display:block}
+  .dots i:nth-child(1){background:#C2562E}
+  .dots i:nth-child(2){background:#A87C24}
+  .dots i:nth-child(3){background:#2E5F57}
+  .copy-btn{
+    display:flex;align-items:center;gap:.4rem;
+    background:transparent;border:1px solid #3a3322;color:var(--code-dim);
+    font-family:"JetBrains Mono",monospace;font-size:.72rem;
+    padding:.32rem .7rem;border-radius:7px;cursor:pointer;transition:.2s;letter-spacing:.04em;
+  }
+  .copy-btn:hover{color:var(--code-text);border-color:#5a4f33;background:#241f15}
+  .copy-btn svg{width:13px;height:13px}
+  .copy-btn.done{color:#9BCFA8;border-color:#3a5240}
+  pre.prompt-text{
+    margin:0;padding:1.1rem 1.2rem;
+    font-family:"JetBrains Mono","Noto Sans TC",monospace;
+    font-size:.86rem;line-height:1.78;color:var(--code-text);
+    white-space:pre-wrap;word-break:break-word;overflow-x:auto;
+  }
+
+  /* ---------- 置頂個人化選單列 ---------- */
+  .persona-bar{
+    background:linear-gradient(180deg,#211C15,#17140F);
+    border-bottom:1px solid #2c2619;
+    padding:.7rem clamp(1rem,4vw,3rem);
+    color:var(--code-text);
+  }
+  .persona-inner{
+    max-width:1180px;margin:0 auto;
+    display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  }
+  .persona-label{
+    display:flex;align-items:center;gap:.45rem;flex-shrink:0;
+    font-family:"Fraunces",serif;font-weight:900;font-size:.95rem;color:#fff;letter-spacing:.02em;
+  }
+  .persona-label svg{width:16px;height:16px;color:var(--clay)}
+  .persona-fields{display:flex;gap:.8rem;flex-wrap:wrap;flex:1;min-width:240px}
+  .pf{display:flex;flex-direction:column;gap:.2rem;flex:1;min-width:170px}
+  .pf label{
+    font-family:"JetBrains Mono",monospace;font-size:.64rem;letter-spacing:.12em;
+    color:#9C9072;text-transform:uppercase;display:flex;align-items:center;gap:.35rem;
+  }
+  .pf label em{font-style:normal;color:var(--clay);font-size:.62rem;letter-spacing:.06em}
+  .pf input{
+    background:#0F0D09;border:1px solid #34301f;border-radius:9px;
+    padding:.5rem .7rem;color:var(--code-text);font-family:"Noto Sans TC";font-size:.9rem;
+    transition:.2s;width:100%;
+  }
+  .pf input::placeholder{color:#6b6450}
+  .pf input:focus{outline:none;border-color:var(--clay);box-shadow:0 0 0 3px rgba(188,74,42,.18)}
+  .pf input.flash{animation:flashField 1.1s ease}
+  @keyframes flashField{0%,100%{border-color:#34301f}30%,70%{border-color:var(--clay);box-shadow:0 0 0 4px rgba(188,74,42,.28)}}
+  .persona-hint{
+    flex-shrink:0;font-size:.74rem;color:#9C9072;font-weight:300;letter-spacing:.02em;
+  }
+  .persona-hint b{color:#C9A24A;font-weight:700}
+  @media(max-width:760px){.persona-hint{display:none}}
+
+  /* spinner */
+  .spin{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:inline-block}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  /* ---------- 提示詞列上的動作群組 + 改寫鈕 ---------- */
+  .bar-actions{display:flex;align-items:center;gap:.5rem}
+  .rewrite-btn{
+    display:flex;align-items:center;gap:.4rem;
+    background:rgba(188,74,42,.16);border:1px solid #6e3320;color:#E9A487;
+    font-family:"Noto Sans TC";font-weight:700;font-size:.72rem;
+    padding:.32rem .7rem;border-radius:7px;cursor:pointer;transition:.2s;letter-spacing:.04em;
+  }
+  .rewrite-btn:hover{background:rgba(188,74,42,.3);color:#fff;border-color:var(--clay)}
+  .rewrite-btn:disabled{opacity:.6;cursor:wait}
+  .rewrite-btn svg{width:13px;height:13px}
+  .rewrite-btn.is-on{background:#241f15;border-color:#5a4f33;color:var(--code-dim)}
+  /* 改寫狀態徽章 */
+  .persona-badge{
+    font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.06em;
+    color:#C9A24A;background:rgba(201,162,74,.12);border:1px solid #5a4d2a;
+    padding:.18rem .55rem;border-radius:6px;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis;
+  }
+  .prompt-block.personalized{border-color:#5a4d2a;box-shadow:0 18px 40px -22px rgba(0,0,0,.6),0 0 0 1px rgba(201,162,74,.25)}
+  .prompt-block.personalized .prompt-bar{background:#1e1a12}
+
+  /* ---------- 浮動按鈕 ---------- */
+  .fab{
+    position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:80;
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--clay);color:#fff;text-decoration:none;
+    padding:.8rem 1.3rem;border-radius:999px;font-weight:700;font-size:.9rem;
+    box-shadow:0 14px 34px -12px rgba(188,74,42,.7);transition:.25s;
+  }
+  .fab:hover{background:var(--clay-deep);transform:translateY(-3px)}
+  .fab svg{width:18px;height:18px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:3rem 0 4rem;text-align:center;color:var(--ink-soft)}
+  footer .big{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.3rem,3vw,1.8rem);color:var(--ink);margin-bottom:.8rem}
+  footer .big em{font-family:"Fraunces",serif;font-style:italic;color:var(--clay)}
+  footer p{font-size:.85rem;font-weight:300}
+
+  /* 進場動畫 */
+  .reveal{opacity:0;transform:translateY(22px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* toast */
+  #toast{
+    position:fixed;left:50%;bottom:2.2rem;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--paper);padding:.65rem 1.2rem;border-radius:10px;
+    font-size:.85rem;opacity:0;pointer-events:none;transition:.3s;z-index:120;
+    box-shadow:0 10px 30px -10px rgba(0,0,0,.5);
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="sticky-head">
+  <div class="topbar">
+    <div class="brand"><b>AI 通識 · Day 1</b><span>重點筆記 / 提示詞庫</span></div>
+    <nav class="topnav">
+      <a href="#s2">AI 背景</a>
+      <a href="#s3">Gemini</a>
+      <a href="#s4">提示詞工程</a>
+      <a href="#s5">功能應用</a>
+      <a href="#s6">NotebookLM</a>
+      <a href="#s8">Studio</a>
+    </nav>
+  </div>
+  <div class="persona-bar">
+    <div class="persona-inner">
+      <div class="persona-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg>
+        個人化設定
+      </div>
+      <div class="persona-fields">
+        <div class="pf">
+          <label>身分背景</label>
+          <input id="p-identity" list="identity-list" autocomplete="off" placeholder="例：國小老師（可自行輸入）">
+          <datalist id="identity-list">
+            <option value="國小老師"><option value="中學老師"><option value="大學教授"><option value="學生"><option value="家長"><option value="上班族"><option value="專案經理"><option value="行銷企劃"><option value="業務"><option value="工程師"><option value="設計師"><option value="自由接案者"><option value="創業者"><option value="小編／社群經營"><option value="護理師"><option value="退休族">
+          </datalist>
+        </div>
+        <div class="pf">
+          <label>目標情境 <em>· 優先</em></label>
+          <input id="p-scenario" list="scenario-list" autocomplete="off" placeholder="例：研究股票（可自行輸入）">
+          <datalist id="scenario-list">
+            <option value="研究股票投資"><option value="規劃旅遊行程"><option value="寫工作郵件"><option value="教學備課"><option value="親子共學"><option value="經營社群媒體"><option value="學習新技能"><option value="求職與履歷"><option value="整理會議記錄"><option value="製作簡報"><option value="健身與飲食規劃"><option value="個人理財規劃"><option value="客戶跟進"><option value="撰寫行銷文案"><option value="準備考試">
+          </datalist>
+        </div>
+      </div>
+      <div class="persona-hint">填好後 → 點任一提示詞右上角的 <b>✦ 改寫</b></div>
+    </div>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <div class="eyebrow">AI Literacy · 6/6 學習筆記</div>
+  <h1>跟 AI 說話的<em>藝術</em><br>與你的隨身提示詞庫</h1>
+  <p class="lede">這是搭配課堂簡報的重點筆記網頁。所有指南中出現過的提示詞，都收進了可一鍵複製的代碼塊。在上方填入你的「身分背景」與「目標情境」，再點任一提示詞旁的 <b>✦ 改寫</b>，AI 就會把那段範本改寫成貼合你情境的版本。</p>
+  <div class="hero-meta">
+    <div><b>27</b>段提示詞範本</div>
+    <div><b>3</b>大黃金框架</div>
+    <div><b>27</b>段一鍵改寫</div>
+  </div>
+</header>
+
+<!-- ============ 第二節 AI 背景 ============ -->
+<section class="block wrap" id="s2">
+  <div class="sec-head reveal">
+    <span class="sec-num">02</span>
+    <div class="sec-titles">
+      <h2>AI 背景：它跟一般程式哪裡不一樣</h2>
+      <p>傳統軟體是「規則寫死」，AI 是「從大量例子學出來」。</p>
+    </div>
+  </div>
+
+  <h3>AI 的四個核心能力</h3>
+  <p class="note soft">這四種能力組合在一起，就是你每天在 Gemini、ChatGPT 上體驗到的那個感覺。</p>
+  <div class="cards reveal">
+    <div class="card"><span class="k">PERCEPTION</span><h5>感知</h5><p>看懂外界訊息：拍照辨識內容、語音轉文字、刷臉、拍照翻譯。</p></div>
+    <div class="card"><span class="k">LEARNING</span><h5>學習</h5><p>從大量數據自己找規律，不需要一條條被告知規則，像小孩學語言。</p></div>
+    <div class="card"><span class="k">REASONING</span><h5>推理</h5><p>根據已知資訊往下推，把幾件事連起來想。新模型有「思考模式」。</p></div>
+    <div class="card"><span class="k">GENERATION</span><h5>生成</h5><p>創造從沒存在過的東西：寫文章、畫圖、作曲、寫程式碼。</p></div>
+  </div>
+
+  <h3>現在的 AI：能做什麼、不能做什麼</h3>
+  <p class="note"><strong>弱 AI（現況）vs. 強 AI（未來）</strong>：我們現在用的全是弱人工智慧——能力「有範圍」。像 Gemini 是「博學的實習生」，不是有自我意識的智慧體。</p>
+  <p class="note"><strong>生成式 vs. 判別式</strong>：以前的 AI 是「質檢員」（這是/不是垃圾信）；現在的生成式 AI 是「設計師」，你給方向、它給成品。</p>
+  <blockquote>AI 的兩大限制：<b>隨機性</b>（同問題問兩次答案可能不同）與<b>幻覺</b>（很有把握地說出不存在的東西）。遇到重要事實，務必再查一次。</blockquote>
+
+  <h3>不要盲目迷信大廠牌</h3>
+  <p class="note soft">各家強項不同、排名每月都在變。想知道現在誰最強，可看用盲測投票排名的 <strong>LMSYS Chatbot Arena</strong>（lmarena.ai）——最接近真實使用體驗的評估方式。</p>
+  <div class="keywords">
+    <span class="chip"># 感知 學習 推理 生成</span><span class="chip"># 弱AI / 強AI(AGI)</span><span class="chip"># 生成式 / 判別式</span><span class="chip"># 隨機性 · 幻覺</span><span class="chip"># Chatbot Arena 盲測</span>
+  </div>
+</section>
+
+<!-- ============ 第三節 Gemini ============ -->
+<section class="block wrap" id="s3">
+  <div class="sec-head reveal">
+    <span class="sec-num">03</span>
+    <div class="sec-titles">
+      <h2>認識 Gemini：今天的主要學習環境</h2>
+      <p>不只是「怎麼用」，而是「我為什麼選它」。</p>
+    </div>
+  </div>
+  <div class="cards reveal">
+    <div class="card"><span class="k">ECOSYSTEM</span><h5>Google 生態整合</h5><p>Gmail、雲端硬碟、地圖、YouTube、日曆、Chrome 都能直接讀取協作，不用切換視窗。</p></div>
+    <div class="card"><span class="k">CONTEXT</span><h5>長上下文處理</h5><p>上下文視窗是主流工具中最大之一，一次能讀完一本薄小說或多份長報告。</p></div>
+    <div class="card"><span class="k">MULTIMODAL</span><h5>原生多模態</h5><p>骨子裡就能同時理解文字、圖片、影片、聲音——拍菜單問過敏、拍筆記轉文字。</p></div>
+    <div class="card"><span class="k">FREE</span><h5>免費且用量充足</h5><p>今天課程用到的全部功能，用免費帳號都能完成。</p></div>
+  </div>
+  <p class="note soft">介面三件事：<strong>側邊欄</strong>（新對話／搜尋對話／媒體庫／筆記本）、<strong>附件鈕</strong>（上傳檔案或連結雲端硬碟）、<strong>設定</strong>（個人化智慧服務＋個人記憶匯入）。新主題建議都從「新對話」開始，避免舊脈絡干擾。</p>
+</section>
+
+<!-- ============ 第四節 提示詞工程（核心） ============ -->
+<section class="block wrap" id="s4">
+  <div class="sec-head reveal">
+    <span class="sec-num">04</span>
+    <div class="sec-titles">
+      <h2>提示詞工程：本課程的核心</h2>
+      <p>提示詞 = 和 AI 說話的藝術。它不是技術，是溝通與思考的框架。</p>
+    </div>
+  </div>
+
+  <blockquote>AI 就像神燈精靈：你說「我要變得很有錢」，它可能把你變成一隻純金青蛙。提示詞工程，就是學會精準地許願，防止被「誤解」。</blockquote>
+
+  <h3>同一件事，弱說法 vs. 強說法</h3>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">弱 · 模糊</span><span class="prompt-sub">AI 只好亂猜，給你模板廢話</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">幫我寫一封請假信</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">強 · 具體</span><span class="prompt-sub">角色＋背景＋輸出要求，讓 AI 有方向</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">我是一位在科技公司上班的工程師，需要請明天一天的病假。收件人是我的直屬主管，我們平常的相處是輕鬆但專業的。請幫我用繁體中文寫一封 100 字以內的請假訊息，語氣誠懇但不過度正式，結尾附上已安排同事代接緊急工作的說明。</pre></div>
+  </div>
+
+  <h3>三個最容易踩的地雷</h3>
+  <div class="cards reveal">
+    <div class="card"><span class="k">01</span><h5>太模糊</h5><p>用數字說話，別用形容詞。「100 字以內」比「短一點」清楚一百倍。</p></div>
+    <div class="card"><span class="k">02</span><h5>用否定句</h5><p>「不要想粉紅大象」反而浮現大象。把「不要 X」改成「請做 Y」。</p></div>
+    <div class="card"><span class="k">03</span><h5>一次塞太多任務</h5><p>一個對話專注做一件事，結果更準確。</p></div>
+  </div>
+
+  <h3>常用模式：少樣本提示（Few-Shot）</h3>
+  <p class="note soft">說不清楚「風格」時，直接給例子讓 AI 照貓畫虎。反之，開放性問題就別給太多範本（Zero-Shot），以免限制創意。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">Few-Shot</span><span class="prompt-name">給範例教 AI 照著做</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請模仿以下格式，把成語改寫成台灣年輕人會用的口語說法：
+
+例子 1：一石二鳥 → 一箭雙雕那種，一次做好兩件事
+例子 2：班門弄斧 → 在行家面前現一手，自己很丟臉
+
+現在請改寫：對牛彈琴</pre></div>
+  </div>
+  <h4>思維鏈（Chain of Thought）· 分段檢核</h4>
+  <p class="note soft">「請一步一步思考」這招現在主流 AI 多已內建，這段提示詞更常用在「分段檢核」——讓 AI 每完成一步就先輸出等你確認，再繼續下一步，避免做完一大篇才發現方向跑偏。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">分段檢核</span><span class="prompt-name">加在複雜任務後，逐步確認不跑偏</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請你將任務拆解並規劃執行步驟，每完成一段先輸出讓我確認，再執行下一步。
+
+── 完整示範 ──
+我想規劃一份三個月的健身計畫，目標是增肌並維持有氧體能。
+請你將任務拆解並規劃執行步驟，每完成一段先輸出讓我確認，再執行下一步。</pre></div>
+  </div>
+
+  <h4>指定輸出格式</h4>
+  <p class="note soft">永遠告訴 AI 你要的版型。有格式的回答可以直接複製貼用，沒有格式的你還要花時間整理。常用格式：<strong>Markdown 表格</strong>（比較最好用）、<strong>條列清單</strong>（整理重點）、<strong>JSON</strong>（給工程師或丟進其他工具）、<strong>Code Block</strong>（程式碼）。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">指定格式</span><span class="prompt-name">告訴 AI 你要的版型，省去整理時間</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請根據以下資訊，依這個格式輸出：
+
+**一句話結論**（20 字以內）
+
+**比較表**（Markdown 表格）
+| 選項 | 優點 | 缺點 | 適合對象 |
+|------|------|------|---------|
+
+**行動待辦清單**（條列式，由重要到次要排序）
+
+資訊：（貼上你要分析的內容）</pre></div>
+  </div>
+
+  <h3>三大黃金框架</h3>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">BROKE</span><span class="prompt-name">背景·角色·目標·關鍵結果·例子</span><span class="prompt-sub">職場情境</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">B：我是一間中型製造業公司的 HR，公司正在籌備年度員工滿意度調查。
+R：請你扮演一位有 10 年經驗的人資顧問。
+O：幫我設計一份員工滿意度問卷。
+K：問卷包含 10 題，涵蓋工作環境、薪資福利、主管關係三個面向，每題用 1–5 分的李克特量表，最後附上一題開放式問答。用繁體中文，語氣中性專業。
+E：風格參考政府機關的官方問卷，清楚但不死板。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">CHAT</span><span class="prompt-name">我的角色·背景·目標·任務</span><span class="prompt-sub">家長情境</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">C：我是一位小學三年級學生的家長。
+H：孩子下週要參加學校的自然科學小報告，題目是「台灣的候鳥」，他完全不知道從何開始。
+A：我想幫孩子找到適合他程度、能自己理解的學習資料。
+T：請推薦三個適合小學生看的繁體中文網站或 YouTube 頻道，並用一句話說明每個的特色。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">CO-STAR</span><span class="prompt-name">情境·目的·風格·語氣·受眾·格式</span><span class="prompt-sub">老師情境</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">C：我在國中擔任自然科老師，正在製作一系列「AI 與生活」的主題課程。
+O：寫一段課堂開場白，目的是引起學生對 AI 的好奇心，讓他們覺得 AI 跟自己的生活有關。
+S：參考 TED 演講的開場風格——先用一個問題或故事勾住聽眾。
+T：活潑、有點挑戰性，讓學生想反駁或想知道答案。
+A：受眾是 13–15 歲的國中生，喜歡滑手機但對上課沒興趣。
+R：約 150 字，口語化，可以直接在課堂上念出來。</pre></div>
+  </div>
+
+  <h3>進階技巧</h3>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">概念對齊</span><span class="prompt-name">先確認假設，再開始做事</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">我想請你幫我規劃一個三天兩夜的台東旅遊行程。在開始之前，請先列出你對這個任務的假設（例如：預算、交通方式、適合的對象、住宿偏好），等我確認後再開始規劃。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">角色反轉</span><span class="prompt-name">費曼學習法 · 讓 AI 考你</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">我剛學完「機器學習」的基本概念。請你扮演一位好奇的小學生，用我可能答不出來的問題來考我，看看我有沒有真的理解。每次只問一個問題，等我回答後再追問或給回饋。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">迭代優化</span><span class="prompt-name">AI 自評 + 給更好版本</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">（貼上 AI 剛剛的回答）
+請對以上這個回答打個分數（1–10），說明最弱的一個地方，並給出一個修改後的更好版本。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">後設提問</span><span class="prompt-name">不知道怎麼問，就問 AI 怎麼問</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">我想請你幫我做某件事，但我不確定怎麼表達才能讓你給出最好的回答。請問你需要我提供哪些資訊？</pre></div>
+  </div>
+
+  <h3>實作練習（請在 Gemini 上動手）</h3>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">練習 1</span><span class="prompt-name">用 BROKE 寫一封職場郵件</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">B：我是（你的職位），目前（情境說明）。
+R：請你扮演一位有豐富職場溝通經驗的助理。
+O：幫我寫一封給（收件人）的電子郵件。
+K：郵件需要包含（核心內容），字數在（X）字以內，語氣（正式 / 輕鬆專業 / 親切）。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">練習 2</span><span class="prompt-name">讓 Gemini 扮演專家（兩版）</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">【家長版】
+請你扮演一位有 15 年經驗的小兒科醫師，以家長能理解的語言，解釋為什麼孩子晚上睡前不建議使用手機。
+
+【職場版】
+請你扮演一位資深人資顧問，針對以下情況給我三個具體可行的建議，並說明每個建議背後的理由：（貼入你的情境）</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">練習 3</span><span class="prompt-name">指定 Markdown 表格輸出</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請用 Markdown 表格比較 ChatGPT、Claude、Gemini 三個工具，欄位包含：開發公司、免費版用量、最強特點、最適合的使用情境。</pre></div>
+  </div>
+</section>
+
+<!-- ============ 第五節 Gemini 功能 ============ -->
+<section class="block wrap" id="s5">
+  <div class="sec-head reveal">
+    <span class="sec-num">05</span>
+    <div class="sec-titles">
+      <h2>Gemini 功能與使用情境</h2>
+      <p>Gem 助理、視覺辨識、Canvas、Deep Research、AI 繪圖。</p>
+    </div>
+  </div>
+
+  <h3>建立 Gem：你的個人化 AI 助理</h3>
+  <p class="note soft">Gem = 預設好「提示詞＋角色設定」的助理，設定一次，之後打開就知道你的背景。不知道怎麼寫指令？先請 Gemini 幫你設計。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">設計 Gem 的 Gem</span><span class="prompt-name">讓 AI 幫你寫 Gem 指令</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請幫我設計一個 Gem 的指令，這個 Gem 的用途是擔任我的「職場Email助理」。它需要：了解我是一位在外商公司工作的專案經理、回覆風格專業但不死板、每次幫我寫信前會先確認收件人是誰和信件目的、輸出繁體中文。請直接給我可以複製貼入 Gem 指令欄的完整文字。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">Gem 範本</span><span class="prompt-name">職場助理 Gem 指令</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">你是我的職場溝通助理。我是一位（你的職位），在（你的產業）工作。每次我請你幫忙寫信或回覆訊息，你要先問清楚：收件人是誰、目的是什麼、語氣要正式還是輕鬆。用繁體中文，控制在我要求的字數內。如果我沒有特別說，預設用「輕鬆但專業」的語氣。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">Gem 範本</span><span class="prompt-name">學習教練 Gem 指令</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">你是我的學習教練。當我說我想學某個主題，你要先問我：目前的程度、想達到的目標、每天可以投入的時間。然後幫我設計一個具體的學習計畫，列出每天要做什麼。用繁體中文，說話方式要鼓勵但不假掰。</pre></div>
+  </div>
+
+  <h3>視覺辨識與資料摘要</h3>
+  <p class="note soft">上傳圖片可做 <strong>OCR</strong>（提取文字）或<strong>理解內容</strong>（分析圖表、菜單、名片、錯誤截圖）。貼長文或 PDF，請 AI 用指定格式摘要。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">結構化摘要</span><span class="prompt-name">新聞 / 長文摘要</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請閱讀以下新聞，用繁體中文以這個格式輸出摘要：
+- 一句話重點（30 字以內）
+- 事件背景（2 句）
+- 三個關鍵數據或事實
+- 你認為讀者最需要知道的一件事
+
+新聞內容：（貼上新聞全文）</pre></div>
+  </div>
+
+  <h3>Canvas：AI 的協作白板</h3>
+  <p class="note soft">用 html 概念呼叫，右側開啟持續存在的文件視窗——圈出某句話直接下指令，其他內容原封不動，不再整篇重寫。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">Canvas · 開啟</span><span class="prompt-name">校慶邀請函</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">今年是我們學校 50 週年校慶，學生辦了一個「小小藝術家展覽」。我是家長會長，想邀請地方貴賓和校友出席，時間是 6 月 20 日上午 10 點，在學校活動中心。請幫我寫一封正式邀請函，在 Canvas 裡打開。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">Canvas · 局部修改</span><span class="prompt-name">反白某句後輸入</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">改得溫暖有誠意一點，強調我們很期待他們到來。</pre></div>
+  </div>
+
+  <h3>Deep Research（深度研究）</h3>
+  <p class="note soft">需要有深度、有來源的概覽報告時用它：先列「研究計畫」，確認後自動瀏覽多個網頁，產出附引用來源的完整報告。適合行業調查、備課、進入陌生領域前。</p>
+
+  <h3>AI 繪圖：用文字生成圖片</h3>
+  <p class="note soft">好的圖片提示詞包含五要素：<strong>主題 · 風格 · 光線 · 構圖 · 情境</strong>。提示詞要嘛「極簡讓 AI 發揮」、要嘛「非常詳細」，中間地帶容易平庸。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">類型 A · 廣告素材</span><span class="prompt-name">甜點 IG 廣告 1:1</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">為台式伴手禮品牌製作 IG 廣告素材，1:1 方形。風格：溫潤生活提案攝影，柔和自然光。構圖：中央放上傳的鳳梨酥禮盒，左後方一束綠色小花，右前方一塊鳳梨酥配烏龍茶，背景米白亞麻桌布，上方保留標題空間。主標：中秋限定 · 金黃時節。配色：米白背景 #F2ECE1，深棕主字，赤陶紅 CTA。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">類型 B · IP 角色</span><span class="prompt-name">2D 角色三視角</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">設計一隻可愛小狐狸 IP 角色的 2D 概念稿，三視角並排（正面、3/4、側面），16:9。風格：扁平底色 + 柔和漸變，線條乾淨，像角色設計師的原始概念稿。角色：橘紅色毛皮，白色胸腹，蓬鬆尾巴，大眼圓臉，配米白細圍巾。背景：米白 reference sheet，附角色名稱標籤「豆豆狐」。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">類型 C · 個人品牌</span><span class="prompt-name">講座主視覺 Banner 16:9</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">為 AI 實戰教學講座製作主視覺 Banner，16:9。風格：日系活動 Banner，超大字主標，關鍵字用黃色螢光筆底色 highlight。左側主標「從零開始的 GPT Image 2 實戰術」，副標「從工作流到商業應用」，底部深藍日期條「4/25 11:00-12:00」。右側講師半身照（圓形裁切），右上角黃色氣泡「AI 實戰專家解析！」。配色：米白底 #F5F2EB，深墨 #1A1815，亮黃 highlight #FDE047。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">類型 D · 商品 Mockup</span><span class="prompt-name">Logo 套用咖啡紙杯</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">把上傳的 Logo 套到 12oz 紙杯上，咖啡廳情境，1:1。風格：柔和自然光，淺景深，非純白商攝。構圖：中央紙杯印上傳 Logo，左側咖啡豆散落木桌，右側磨豆器，背景模糊吧台。配色：米白杯體 #F4EDD8，深棕 #3B2620。輸出要求：紙杯曲面反光真實，Logo 有正確弧面變形。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">通用結構</span><span class="prompt-name">五要素填空模板</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請生成一張圖片：（主題），風格是（插畫/寫實/水彩），光線是（自然光/夕陽/溫暖室內光），構圖是（特寫/全景），氣氛是（輕鬆/神秘/溫馨）。</pre></div>
+  </div>
+</section>
+
+<!-- ============ 第六節 NotebookLM 核心觀念 ============ -->
+<section class="block wrap" id="s6">
+  <div class="sec-head reveal">
+    <span class="sec-num">06</span>
+    <div class="sec-titles">
+      <h2>NotebookLM 核心觀念</h2>
+      <p>Gemini 靠記憶思考後回答；NotebookLM 會「翻你給的書」再回答，並告訴你每句話的出處。</p>
+    </div>
+  </div>
+  <p class="note">為什麼一般 AI 不夠可靠？因為<strong>幻覺</strong>——在查合約、財報、考試答案時，捏造一個來源或數字就是致命問題。NotebookLM 用 <strong>RAG（檢索增強生成）</strong>解決它。</p>
+  <div class="cards reveal">
+    <div class="card"><span class="k">GROUNDING</span><h5>資料封閉性</h5><p>AI 只能從你提供的來源找答案，找不到就說「沒有相關資訊」，不憑空捏造。</p></div>
+    <div class="card"><span class="k">CITATIONS</span><h5>出處追蹤</h5><p>每個回答都標來自哪個來源哪個段落，點引文錨點即可跳到原文對照。</p></div>
+    <div class="card"><span class="k">3-PANEL</span><h5>三欄式黃金架構</h5><p>左：來源區（餵 AI 的課本）｜中：對話區（附引文錨點）｜右：工作室 Studio。</p></div>
+  </div>
+  <p class="note soft">免費版單本上限 50 個來源、約 2500 萬字。進入路徑：Google 九宮格 → NotebookLM，或 notebooklm.google.com。</p>
+</section>
+
+<!-- ============ 第七節 資料匯入實作 ============ -->
+<section class="block wrap" id="s7">
+  <div class="sec-head reveal">
+    <span class="sec-num">07</span>
+    <div class="sec-titles">
+      <h2>多元資料來源匯入</h2>
+      <p>網頁、YouTube、PDF、貼上文字——還能跨語言、處理雜訊網頁。</p>
+    </div>
+  </div>
+  <div class="cards reveal">
+    <div class="card"><span class="k">WEB</span><h5>網頁匯入</h5><p>貼網址或用「探索主題」自動收集相關文章，約 4 秒讀完。</p></div>
+    <div class="card"><span class="k">YOUTUBE</span><h5>影片解析</h5><p>貼網址自動讀字幕，10 秒消化一小時影片。外掛「YouTube to LM」一鍵匯入。</p></div>
+    <div class="card"><span class="k">CROSS-LANG</span><h5>跨語言提問</h5><p>匯入英文資料，直接用繁體中文提問，AI 自動完成理解與翻譯。</p></div>
+    <div class="card"><span class="k">PASTE</span><h5>雜訊網頁處理</h5><p>廣告多抓不到正文？選取正文 → Ctrl+C →「貼上文字」自訂標題儲存。</p></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">實作 1</span><span class="prompt-name">驗證 AI 讀懂資料</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請用 150 字以內，條列式整理這份資料的核心重點與三個關鍵發現。</pre></div>
+  </div>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">實作 2</span><span class="prompt-name">跨來源整合比較</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text">請比較這幾份來源對同一主題的不同觀點，整理成條列式，並標出每個觀點來自哪個來源。</pre></div>
+  </div>
+</section>
+
+<!-- ============ 第八節 Studio + 蘇格拉底 ============ -->
+<section class="block wrap" id="s8">
+  <div class="sec-head reveal">
+    <span class="sec-num">08</span>
+    <div class="sec-titles">
+      <h2>Studio 輸出 與 蘇格拉底引導模式</h2>
+      <p>一鍵把資料轉成九種格式；以及一段「不直接給答案」的引導式 Prompt。</p>
+    </div>
+  </div>
+  <div class="cards reveal">
+    <div class="card"><span class="k">AUDIO</span><h5>音訊摘要 Podcast</h5><p>轉成兩位 AI 主持人的對話式廣播，戴耳機通勤就能吸收。</p></div>
+    <div class="card"><span class="k">MINDMAP</span><h5>心智圖</h5><p>約 6 秒生成，先掌握全局架構再深入提問。</p></div>
+    <div class="card"><span class="k">FLASHCARD</span><h5>學習卡</h5><p>自動提取關鍵詞與定義，做成正反兩面記憶卡。</p></div>
+    <div class="card"><span class="k">QUIZ</span><h5>互動測驗</h5><p>自動出題附解析，點鉛筆圖示可調難易度與題數。</p></div>
+    <div class="card"><span class="k">INFOGRAPHIC</span><h5>資訊圖表</h5><p>視覺化排版，可用「神奇畫筆」輸入微調指令。</p></div>
+  </div>
+
+  <h3>蘇格拉底引導式學習小老師</h3>
+  <p class="note soft">核心：在 Prompt 裡明確規定「絕對禁止直接給答案」，讓 AI 先鼓勵 → 指出線索 → 提引導問題。手機拍課本上傳後貼上此 Prompt 並「儲存為筆記」，再把手機交給孩子。</p>
+  <div class="prompt-wrap">
+    <div class="prompt-label"><span class="prompt-tag">引導式 Prompt</span><span class="prompt-name">親子共學 · 可調年級</span></div>
+    <div class="prompt-block"><div class="prompt-bar"><div class="dots"><i></i><i></i><i></i></div><button class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>複製</button></div><pre class="prompt-text"># Role: 蘇格拉底引導式學習小老師
+
+## Rules:
+1. 你的對話對象是一位【小學五年級】的學生，請使用親切、溫柔、鼓勵性的繁體中文語氣。
+2. 【絕對禁止】直接告訴學生問題的最終答案、選擇題的選項（如 A/B/C/D）或數學的最終計算結果。
+3. 當學生問你問題時，你必須根據左側已上傳的【課本資料來源】：
+   - 先給予正向鼓勵（例如：「你問得真棒！我們一起來動動腦。」）
+   - 找出課本中與該問題相關的「關鍵句」或「提示概念」，用白話、簡單的比喻指引學生
+   - 提出一個簡單的「引導式問題」，引導學生自己去思考、翻書或計算出答案
+4. 每次只引導一個步驟，等學生回答後再給予回饋並引導下一步。
+
+現在，請跟學生打招呼，並問他今天想一起研究課本的哪一個部分？</pre></div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p class="big">說清楚 = <em>思考清楚</em></p>
+  <p>AI 不會取代你，但會用 AI 的人會。｜本頁所有概念與提示詞均出自《AI 通識課程 6/6 學習指南》。</p>
+</footer>
+
+<div id="toast">已複製到剪貼簿 ✓</div>
+
+<script>
+/* ============================================================
+   GEMINI API 設定區 —— 請在此填入你的 API Key
+   ============================================================
+   1. 前往 Google AI Studio (aistudio.google.com) 免費申請 API Key
+   2. 在下方陣列填入一組或多組 Key（用半形逗號分隔、各自用引號包起來）
+   3. 填入多組時，系統會「依次循環使用」；若某組額度用完或失效，
+      會自動跳到下一組重試。
+   ============================================================ */
+const GEMINI_API_KEYS = [
+  // "在這裡貼上你的第一組 API Key",
+  // "在這裡貼上你的第二組 API Key",
+  // "在這裡貼上你的第三組 API Key",
+];
+
+// 使用的模型名稱（如遇到模型不存在的錯誤，可改為 "gemini-2.0-flash" 或 "gemini-flash-latest"）
+const GEMINI_MODEL = "gemini-2.5-flash";
+
+/* ---------- 多金鑰輪詢核心 ---------- */
+let keyCursor = 0;
+function nextKeyIndex(){
+  const i = keyCursor % GEMINI_API_KEYS.length;
+  keyCursor = (keyCursor + 1) % GEMINI_API_KEYS.length;
+  return i;
+}
+
+async function callGemini(systemText, userText){
+  const keys = GEMINI_API_KEYS.filter(k => k && k.trim() && !k.includes("貼上"));
+  if(keys.length === 0){
+    throw new Error("尚未填入任何 API Key，請打開原始碼於 GEMINI_API_KEYS 區塊填入。");
+  }
+  let lastErr = null;
+  // 依次循環嘗試所有可用金鑰
+  for(let attempt = 0; attempt < keys.length; attempt++){
+    const key = keys[ (keyCursor + attempt) % keys.length ];
+    try{
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${encodeURIComponent(key)}`;
+      const res = await fetch(url, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          system_instruction:{ parts:[{ text: systemText }] },
+          contents:[{ role:"user", parts:[{ text: userText }] }],
+          generationConfig:{ temperature:0.7, maxOutputTokens:1024 }
+        })
+      });
+      if(!res.ok){
+        const t = await res.text();
+        lastErr = new Error(`金鑰 ${attempt+1} 回應 ${res.status}：${t.slice(0,120)}`);
+        continue; // 換下一組
+      }
+      const data = await res.json();
+      const text = (data.candidates && data.candidates[0] && data.candidates[0].content
+        && data.candidates[0].content.parts || [])
+        .map(p => p.text || "").join("").trim();
+      if(!text){ lastErr = new Error("回應為空，換下一組金鑰重試。"); continue; }
+      // 成功 → 推進游標，下次從下一組開始（達成循環使用）
+      keyCursor = (keyCursor + attempt + 1) % keys.length;
+      return text;
+    }catch(e){
+      lastErr = e; // 網路錯誤等，換下一組
+    }
+  }
+  throw lastErr || new Error("所有金鑰皆呼叫失敗。");
+}
+
+/* ---------- 個人化改寫：系統指令（情境優先、保留範本骨架） ---------- */
+const REWRITE_SYSTEM = `你是一個「提示詞個人化改寫助手」。使用者會給你一段現成的『提示詞範本』，以及他的『身分背景』與『目標情境』。你的工作是把這段範本，改寫成貼合使用者情境的版本。
+
+【規則】
+1. 保留範本原本的結構、骨架、欄位與意圖。如果它是 BROKE 五行、CHAT 四行、CO-STAR 六行、Gem 指令、繪圖五要素、或條列摘要格式，就維持那個形態與行數，不要改變它的型態。
+2. 以「目標情境」為最優先考量：把範本裡的主題、舉例素材、情境變數，全部替換成貼合使用者「目標情境」的內容；「身分背景」作為語氣、角色與口吻的輔助。
+3. 不要加入與使用者情境無關的內容，也不要杜撰超出常識的專業數據。
+4. 只輸出「改寫後的提示詞本身」，從第一行直接開始。不要任何前言、說明、解釋、結語，不要用 Markdown 標題或星號等標記符號（範本原本就有的 # 標記則保留）。
+5. 全程使用繁體中文（台灣用語），內容要具體、可立刻貼進 AI 使用。`;
+
+function buildRewriteUser(template, identity, scenario){
+  return `【提示詞範本】
+${template}
+
+【我的身分背景】${identity || "（未填，請以情境為主，語氣保持中性）"}
+【我的目標情境】${scenario}
+
+請依規則，保留這段範本的結構與形態，把其中的主題、舉例素材與情境變數，改寫成貼合「我的目標情境」的版本（情境優先，身分作為語氣與角色的輔助）。只輸出改寫後的提示詞。`;
+}
+
+/* ---------- 介面元素 ---------- */
+const $ = s => document.querySelector(s);
+const idInput = $("#p-identity");
+const scInput = $("#p-scenario");
+
+const WAND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.6 4.9H18l-3.6 3 1.4 4.8L12 16l-3.8 2.7 1.4-4.8L6 11h4.4z"/></svg>';
+const UNDO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 3-7L3 9"/></svg>';
+
+/* ---------- 為每個提示詞區塊注入「改寫」鈕 ---------- */
+document.querySelectorAll(".prompt-block").forEach(block => {
+  const pre = block.querySelector(".prompt-text");
+  if(!pre) return;
+  block.dataset.original = pre.textContent;
+  const bar = block.querySelector(".prompt-bar");
+  const copyBtn = bar.querySelector(".copy-btn");
+
+  const actions = document.createElement("div");
+  actions.className = "bar-actions";
+  const rw = document.createElement("button");
+  rw.type = "button";
+  rw.className = "rewrite-btn";
+  rw.innerHTML = WAND + "改寫";
+  actions.appendChild(rw);
+  actions.appendChild(copyBtn);   // 把原本的複製鈕一起收進右側群組
+  bar.appendChild(actions);
+
+  rw.addEventListener("click", () => handleRewrite(block, rw));
+});
+
+async function handleRewrite(block, btn){
+  const pre = block.querySelector(".prompt-text");
+
+  // 已個人化 → 點擊還原
+  if(block.classList.contains("personalized")){
+    pre.textContent = block.dataset.original;
+    block.classList.remove("personalized");
+    removeBadge(block);
+    btn.classList.remove("is-on");
+    btn.innerHTML = WAND + "改寫";
+    return;
+  }
+
+  const identity = idInput.value.trim();
+  const scenario = scInput.value.trim();
+  if(!scenario){
+    flashField(scInput);
+    showToast("請先在上方填寫「目標情境」");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>改寫中';
+
+  try{
+    const text = await callGemini(REWRITE_SYSTEM, buildRewriteUser(block.dataset.original, identity, scenario));
+    pre.textContent = text;
+    block.classList.add("personalized");
+    addBadge(block, scenario);
+    btn.classList.add("is-on");
+    btn.innerHTML = UNDO + "還原";
+  }catch(e){
+    showToast(e.message || "改寫失敗，請稍後再試");
+    btn.innerHTML = WAND + "改寫";
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+function addBadge(block, scenario){
+  const bar = block.querySelector(".prompt-bar");
+  removeBadge(block);
+  const b = document.createElement("span");
+  b.className = "persona-badge";
+  const s = scenario.length > 12 ? scenario.slice(0,12) + "…" : scenario;
+  b.textContent = "✦ 已依「" + s + "」改寫";
+  bar.insertBefore(b, bar.querySelector(".bar-actions"));
+}
+function removeBadge(block){
+  const old = block.querySelector(".persona-badge");
+  if(old) old.remove();
+}
+function flashField(input){
+  input.scrollIntoView({behavior:"smooth", block:"center"});
+  input.classList.remove("flash"); void input.offsetWidth; input.classList.add("flash");
+  input.focus();
+}
+
+/* ---------- 一鍵複製（事件委派，全頁通用） ---------- */
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".copy-btn");
+  if(!btn) return;
+  const block = btn.closest(".prompt-block");
+  const pre = block.querySelector(".prompt-text");
+  const text = pre ? pre.textContent : "";
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(_){
+    // 後備方案
+    const ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); ta.remove();
+  }
+  const original = btn.innerHTML;
+  btn.classList.add("done");
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>已複製';
+  showToast();
+  setTimeout(() => { btn.classList.remove("done"); btn.innerHTML = original; }, 1600);
+});
+
+let toastTimer;
+function showToast(){
+  const t = $("#toast");
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 1500);
+}
+
+/* ---------- 進場動畫 ---------- */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target);} });
+}, {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
